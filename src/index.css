@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  --max-width: 1040px;
+  --max-width: 960px;
 }
 
 * {
@@ -72,12 +72,6 @@ header {
       }
     }
   }
-}
-
-.container {
-  max-width: var(--max-width);
-  width: 100%;
-  margin: 0 auto;
 }
 
 .sort-input {
@@ -173,11 +167,60 @@ header {
   }
 }
 
+.container {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 32px auto;
+  display: flex;
+  gap: 32px;
+}
+
+.sidebar {
+  width: 180px;
+
+  h2 {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      span {
+        display: block;
+        font-size: 14px;
+        padding: 8px 16px;
+        background: #fff;
+        border: none;
+        border-radius: 2px;
+        border: 1px solid #eee;
+        cursor: pointer;
+      }
+
+      span:hover {
+        background: #ef4444;
+        color: #fff;
+        border: 1px solid #ef4444;
+      }
+    }
+
+    li + li {
+      margin-top: 4px;
+    }
+  }
+}
+
+.main {
+  flex: 1;
+}
+
 .products {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin: 24px auto 0;
+  margin: 0px auto 0;
 
   section {
     border: 1px solid #eee;

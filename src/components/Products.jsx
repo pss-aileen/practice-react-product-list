@@ -146,7 +146,45 @@ export default function Products() {
       </div>
 
       <div className='container'>
-        <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
+        <div className='sidebar'>
+          <h2>CATEGORY</h2>
+
+          <ul>
+            <li>
+              <span>Beauty</span>
+            </li>
+            <li>
+              <span>Fragrances</span>
+            </li>
+            <li>
+              <span>Furniture</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+          </ul>
+        </div>
+        <div className='main'>
+          <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
+        </div>
       </div>
     </>
   );
