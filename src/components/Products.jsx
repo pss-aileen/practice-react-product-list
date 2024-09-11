@@ -100,41 +100,92 @@ export default function Products() {
 
   return (
     <>
-      <div className='search-input'>
-        <input type='text' value={searchInput} placeholder='Search Product Name & Description' onChange={handleChange} />
-        <i className='bi bi-search'></i>
-      </div>
+      <header>
+        <div>
+          <h1>
+            <i className='bi bi-bag-heart-fill'></i>
+            <span>Product List</span>
+          </h1>
+          <div className='search-input'>
+            <input type='text' value={searchInput} placeholder='Search Product Name & Description' onChange={handleChange} />
+            <i className='bi bi-search'></i>
+          </div>
+        </div>
+      </header>
+
       <div className='sort-input'>
-        <p>Sort by</p>
-        <button type='button' onClick={handleTopRatedChange} className={topRatedInputFrag ? 'is-active' : ''} disabled={topRatedInputFrag}>
-          Top Rated
-        </button>
+        <div>
+          <p className='total'>{total} results</p>
+          {/* <p className='total'>1-24 of {total} results</p> */}
+          <p>Sort by</p>
+          <button type='button' onClick={handleTopRatedChange} className={topRatedInputFrag ? 'is-active' : ''} disabled={topRatedInputFrag}>
+            Top Rated
+          </button>
 
-        <ul>
-          <li>
-            <div className={!topRatedInputFrag ? 'is-active' : ''}>
-              {topRatedInputFrag ? 'Price' : priceSortInput === 'asc' ? 'Price: Low to High' : 'Price: High to Low'}
-              <i className='bi bi-chevron-down'></i>
-            </div>
-            <ul>
-              <li>
-                <div onClick={() => handlePriceInputChange('asc')} className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''}>
-                  Price: Low to High {!topRatedInputFrag && priceSortInput === 'asc' ? <i className='bi bi-check2'></i> : ''}
-                </div>
-              </li>
-              <li>
-                <div onClick={() => handlePriceInputChange('desc')} className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''}>
-                  Price: High to Low {!topRatedInputFrag && priceSortInput === 'desc' ? <i className='bi bi-check2'></i> : ''}
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-
-        <p className='total'>Total: {total}</p>
+          <ul>
+            <li>
+              <div className={!topRatedInputFrag ? 'is-active' : ''}>
+                {topRatedInputFrag ? 'Price' : priceSortInput === 'asc' ? 'Price: Low to High' : 'Price: High to Low'}
+                <i className='bi bi-chevron-down'></i>
+              </div>
+              <ul>
+                <li>
+                  <div onClick={() => handlePriceInputChange('asc')} className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''}>
+                    Price: Low to High {!topRatedInputFrag && priceSortInput === 'asc' ? <i className='bi bi-check2'></i> : ''}
+                  </div>
+                </li>
+                <li>
+                  <div onClick={() => handlePriceInputChange('desc')} className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''}>
+                    Price: High to Low {!topRatedInputFrag && priceSortInput === 'desc' ? <i className='bi bi-check2'></i> : ''}
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
+      <div className='container'>
+        <div className='sidebar'>
+          <h2>CATEGORY</h2>
+
+          <ul>
+            <li>
+              <span>Beauty</span>
+            </li>
+            <li>
+              <span>Fragrances</span>
+            </li>
+            <li>
+              <span>Furniture</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+            <li>
+              <span>beauty</span>
+            </li>
+          </ul>
+        </div>
+        <div className='main'>
+          <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
+        </div>
+      </div>
     </>
   );
 }

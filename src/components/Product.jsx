@@ -16,7 +16,7 @@ export default function Product({ title, description, thumbnail, availabilitySta
   return (
     <section>
       <div className='thumbnail'>
-        <img src={thumbnail} width='160' height='160' alt={title} />
+        <img src={thumbnail} width='140' height='140' alt={title} />
       </div>
       <p className={`availabilityStatus ${availabilityStatusOption}`}>{availabilityStatus}</p>
       <div className='body'>
