@@ -20,6 +20,9 @@ export default function Products() {
   デフォルトはtop rated、PriceをさわればPrice順番
   Top retatedを押せば、その通りに
 
+  カテゴリーでのsort
+  https://dummyjson.com/products/category/smartphones?sortBy=id&order=desc&select=title,
+  https://dummyjson.com/products/category/smartphones?search?q=phone&limit=10&skip=10&select=title,description
   */
 
   useEffect(() => {
