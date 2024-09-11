@@ -95,15 +95,19 @@ export default function Products() {
       </div>
       <div className='sort-input'>
         <p>Sort by</p>
-        <button type='button' onClick={() => setTopRatedInput((v) => !v)} className={topRatedInput ? "is-active": ""}>
+        <button type='button' onClick={() => setTopRatedInput((v) => !v)} className={topRatedInput ? 'is-active' : ''}>
           Top Rated
         </button>
-        <select value={priceSortInput} onChange={(e) => setPriceSortInput(e.target.value)}>
-          <option value='asc'>Price: Low to High</option>
-          <option value='desc'>Price: High to Low</option>
-        </select>
+        <div className='price'>
+          <p>Price</p>
+          <ul>
+            <li>Price: Low to High</li>
+            <li>Price: High to Low</li>
+          </ul>
+        </div>
+        <p className='total'>Total: {total}</p>
       </div>
-      <p className='total'>Total: {total}</p>
+
       <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} />) : <p>Loading...</p>}</div>
     </>
   );

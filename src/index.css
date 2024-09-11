@@ -15,6 +15,7 @@ body {
   font-style: normal;
   color: #333;
   padding: 32px 0;
+  background: #f8f8f8;
 }
 
 .App {
@@ -76,11 +77,47 @@ h1 {
     background: #ef4444;
     color: #fff;
   }
-}
 
-.total {
-  margin-top: 24px;
-  color: #999;
+  .total {
+    color: #999;
+    margin-left: auto;
+  }
+
+  .price {
+    padding: 8px 16px;
+    background: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 200px;
+    position: relative;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      position: absolute;
+      bottom: 0px;
+      transform: translateY(100%);
+      left: 0;
+      margin: 0;
+
+      li {
+        margin: 0;
+        padding: 8px 16px;
+        background: #fff;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        position: relative;
+      }
+
+      li:hover {
+        background: #ef4444;
+        color: #fff;
+      }
+    }
+  }
 }
 
 .products {
@@ -97,13 +134,13 @@ h1 {
     overflow: hidden;
     position: relative;
     display: flex;
+    background: #fff;
 
     img {
       width: 160px;
       aspect-ratio: 1/1;
       object-fit: cover;
-      border-bottom: 1px solid #eee;
-      background: #f8f8f8;
+      background: #eee;
       padding: 8px;
     }
 
