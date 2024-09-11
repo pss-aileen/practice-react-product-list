@@ -31,8 +31,6 @@ header {
     width: calc(100% - 32px);
     margin: 0 auto;
     padding: 8px 0;
-    display: flex;
-    gap: 24px;
     align-items: center;
 
     h1 {
@@ -41,11 +39,12 @@ header {
       display: flex;
       gap: 8px;
       align-items: center;
+      justify-content: center;
     }
 
     .search-input {
-      flex: 1;
       position: relative;
+      margin-top: 8px;
 
       input {
         display: block;
@@ -55,7 +54,7 @@ header {
         color: #333;
         border: none;
         padding: 8px 8px 8px 48px;
-        border: 1px solid #a3a3a3;
+        /* border: 1px solid #a3a3a3; */
         border-radius: 4px;
       }
 
@@ -74,7 +73,7 @@ header {
   }
 }
 
-.sort-input {
+.products-info {
   background: #fff;
   border-bottom: 1px solid #eee;
 
@@ -87,31 +86,122 @@ header {
     align-items: center;
     max-width: var(--max-width);
     width: calc(100% - 32px);
-    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
-  button {
-    padding: 8px 16px;
-    background: #fff;
-    border: none;
-    border-radius: 2px;
-    border: 1px solid #eee;
+  dl {
+    div {
+      margin-top: 16px;
+    }
+    dt {
+      font-weight: bold;
+      color: #777;
+    }
+
+    dd {
+      margin: 8px 0 0;
+    }
+  }
+}
+
+.btn-filter {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filters.is-open {
+  right: 0px;
+  transform: translateX(0%);
+  pointer-events: all;
+}
+
+.overlay.is-open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgb(0 0 0 / 0.6);
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.filters {
+  max-width: 80%;
+  position: fixed;
+  top: 0;
+  right: 0px;
+  transform: translateX(100%);
+  background: #fff;
+  height: 100svh;
+  z-index: 999;
+  pointer-events: none;
+  transition: transform 0.3s;
+  overflow-y: scroll;
+
+  > div {
+    padding: 16px;
+    position: relative;
+
+    > button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px;
+    }
   }
 
-  button:not(:disabled) {
-    cursor: pointer;
+  h2 {
+    font-size: 16px;
+    margin: 0;
   }
 
-  .is-active {
-    background: #ef4444;
-    color: #fff;
-    border: 1px solid #ef4444;
+  .sort {
+    dd {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+
+      button {
+        padding: 8px 16px;
+        background: #fff;
+        border: none;
+        border-radius: 2px;
+        border: 1px solid #eee;
+      }
+
+      button:not(:disabled) {
+        cursor: pointer;
+      }
+
+      .is-active {
+        background: #ef4444;
+        color: #fff;
+        border: 1px solid #ef4444;
+      }
+    }
   }
 
   .total {
     color: #999;
     margin-right: auto;
     width: 100%;
+    pointer-events: none;
   }
 
   ul {
@@ -173,7 +263,7 @@ header {
 .container {
   max-width: var(--max-width);
   width: calc(100% - 32px);
-  margin: 32px auto;
+  margin: 16px auto;
 }
 
 .categories {
@@ -182,19 +272,18 @@ header {
     font-size: 14px;
     color: #666;
   }
+
   ul {
     list-style: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    /* gap: 8px; */
-    /* overflow-x: scroll; */
+    gap: 4px;
 
     li {
-      width: calc(100% / 6);
+      /* width: calc(100% / 1); */
       span {
         display: block;
-        font-size: 12px;
         padding: 8px 16px;
         background: #fff;
         border: none;
@@ -221,24 +310,25 @@ header {
   section {
     border: 1px solid #eee;
     border-radius: 4px;
-    /* width: calc((100% - 16px * 4) / 5); */
-    width: 100%;
+    width: calc((100% - 16px * 1) / 2);
+    /* width: 100%; */
     overflow: hidden;
     position: relative;
-    display: flex;
     background: #fff;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
 
     .thumbnail {
-      width: 140px;
-      height: 100%;
+      width: 100%;
+      aspect-ratio: 4/3;
       padding: 8px;
       background: #eee;
+
       img {
         width: 100%;
         height: 100%;
         aspect-ratio: 1/1;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
 
@@ -270,18 +360,17 @@ header {
       padding: 16px;
 
       .title {
-        font-size: 18px;
         font-weight: bold;
       }
 
       .description {
         font-size: 12px;
         color: #999;
+        display: none;
       }
 
       .price {
         color: #ef4444;
-        font-size: 18px;
         /* text-align: right; */
       }
 

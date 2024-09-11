@@ -32,8 +32,6 @@ export default function Categories() {
   }, []);
   return (
     <div className='categories'>
-      <h2>CATEGORY</h2>
-
       <ul>
         {categories
           ? categories.map((category) => {
