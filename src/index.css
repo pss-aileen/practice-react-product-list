@@ -86,6 +86,8 @@ header {
     font-size: 14px;
     align-items: center;
     max-width: var(--max-width);
+    width: calc(100% - 32px);
+    flex-wrap: wrap;
   }
 
   button {
@@ -109,6 +111,7 @@ header {
   .total {
     color: #999;
     margin-right: auto;
+    width: 100%;
   }
 
   ul {
@@ -169,15 +172,11 @@ header {
 
 .container {
   max-width: var(--max-width);
-  width: 100%;
+  width: calc(100% - 32px);
   margin: 32px auto;
-  display: flex;
-  gap: 32px;
 }
 
-.sidebar {
-  width: 180px;
-
+.categories {
   h2 {
     margin: 0;
     font-size: 14px;
@@ -186,11 +185,16 @@ header {
   ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 8px; */
+    /* overflow-x: scroll; */
 
     li {
+      width: calc(100% / 6);
       span {
         display: block;
-        font-size: 14px;
+        font-size: 12px;
         padding: 8px 16px;
         background: #fff;
         border: none;
@@ -205,15 +209,7 @@ header {
         border: 1px solid #ef4444;
       }
     }
-
-    li + li {
-      margin-top: 4px;
-    }
   }
-}
-
-.main {
-  flex: 1;
 }
 
 .products {

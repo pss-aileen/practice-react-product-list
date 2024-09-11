@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Product from './Product';
+import Categories from './Categories';
 
 export default function Products() {
   const [total, setTotal] = useState(0);
@@ -146,45 +147,9 @@ export default function Products() {
       </div>
 
       <div className='container'>
-        <div className='sidebar'>
-          <h2>CATEGORY</h2>
+        <Categories />
 
-          <ul>
-            <li>
-              <span>Beauty</span>
-            </li>
-            <li>
-              <span>Fragrances</span>
-            </li>
-            <li>
-              <span>Furniture</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-          </ul>
-        </div>
-        <div className='main'>
-          <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
-        </div>
+        <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
       </div>
     </>
   );
