@@ -70,12 +70,17 @@ h1 {
     background: #fff;
     border: none;
     border-radius: 2px;
+    border: 1px solid #eee;
+  }
+
+  button:not(:disabled) {
     cursor: pointer;
   }
 
   .is-active {
     background: #ef4444;
     color: #fff;
+    border: 1px solid #ef4444;
   }
 
   .total {
@@ -92,15 +97,26 @@ h1 {
     width: 200px;
     position: relative;
 
+    p:hover + ul {
+      opacity: 1;
+    }
+
+    ul:hover {
+      opacity: 1;
+    }
+
     ul {
+      opacity: 0;
       list-style: none;
       padding: 0;
-      width: 100%;
+      width: calc(100% + 2px);
       position: absolute;
       bottom: 0px;
       transform: translateY(100%);
-      left: 0;
+      left: -1px;
       margin: 0;
+      z-index: 2;
+      border: 1px solid #eee;
 
       li {
         margin: 0;
@@ -110,6 +126,16 @@ h1 {
         border-radius: 2px;
         cursor: pointer;
         position: relative;
+      }
+
+      .is-active {
+        background: #ef4444;
+        color: #fff;
+        border: 1px solid #ef4444;
+      }
+
+      li + li {
+        border-top: 1px solid #eee;
       }
 
       li:hover {

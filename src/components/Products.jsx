@@ -6,7 +6,9 @@ export default function Products() {
   const [products, setProducts] = useState(null);
   const [searchInput, setSearchInput] = useState('');
   const [priceSortInput, setPriceSortInput] = useState('asc');
+  const [priseSortInputFrag, setPriseSortInputFrag] = useState(false);
   const [topRatedInput, setTopRatedInput] = useState(true);
+  const [topRatedInputFrag, setTopRatedInputFrag] = useState(true);
 
   /*
   目標URL: 
@@ -56,7 +58,7 @@ export default function Products() {
         officialUrl += '/search?q=' + searchInput;
       }
 
-      if (topRatedInput) {
+      if (topRatedInput && !priseSortInputFrag) {
         officialUrl += connection + 'sortBy=' + 'rating';
         officialUrl += connection + 'order=' + 'asc';
       } else {
@@ -76,12 +78,21 @@ export default function Products() {
     return () => {
       isMounted = false;
     };
-  }, [searchInput, topRatedInput, priceSortInput]);
+  }, [searchInput, topRatedInput, priceSortInput, priseSortInputFrag]);
 
-  // useEffect(() => {
-  //   if (topRatedInput && priceSortInput === 'desc') setTopRatedInput(false);
-  //   if (topRatedInput && priceSortInput === 'desc') setTopRatedInput(false);
-  // }, [priceSortInput]);
+  useEffect(() => {}, [priseSortInputFrag]);
+
+  function handlePriceInputChange(value) {
+    setPriseSortInputFrag(true);
+    setTopRatedInputFrag(false);
+    setPriceSortInput(value);
+  }
+
+  function handleTopRatedChange() {
+    setPriseSortInputFrag(false);
+    setTopRatedInput(true);
+    setTopRatedInputFrag(true);
+  }
 
   function handleChange(e) {
     setSearchInput(e.target.value);
@@ -95,14 +106,18 @@ export default function Products() {
       </div>
       <div className='sort-input'>
         <p>Sort by</p>
-        <button type='button' onClick={() => setTopRatedInput((v) => !v)} className={topRatedInput ? 'is-active' : ''}>
+        <button type='button' onClick={handleTopRatedChange} className={topRatedInputFrag ? 'is-active' : ''} disabled={topRatedInputFrag}>
           Top Rated
         </button>
         <div className='price'>
           <p>Price</p>
           <ul>
-            <li>Price: Low to High</li>
-            <li>Price: High to Low</li>
+            <li onClick={() => handlePriceInputChange('asc')} className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''}>
+              Price: Low to High
+            </li>
+            <li onClick={() => handlePriceInputChange('desc')} className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''}>
+              Price: High to Low
+            </li>
           </ul>
         </div>
         <p className='total'>Total: {total}</p>
