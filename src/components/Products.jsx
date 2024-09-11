@@ -37,7 +37,7 @@ export default function Products() {
         }
 
         console.log(json.products);
-        console.log(json.total);
+        // console.log(json.total);
       } catch (error) {
         console.error(error.message);
       }
@@ -60,14 +60,14 @@ export default function Products() {
 
       if (topRatedInput && !priseSortInputFrag) {
         officialUrl += connection + 'sortBy=' + 'rating';
-        officialUrl += connection + 'order=' + 'asc';
+        officialUrl += connection + 'order=' + 'desc';
       } else {
         officialUrl += connection + 'sortBy=price';
         officialUrl += connection + 'order=' + priceSortInput;
       }
 
       officialUrl += connection + selectedData;
-      console.log(officialUrl);
+      // console.log(officialUrl);
       return officialUrl;
     }
 
@@ -109,21 +109,32 @@ export default function Products() {
         <button type='button' onClick={handleTopRatedChange} className={topRatedInputFrag ? 'is-active' : ''} disabled={topRatedInputFrag}>
           Top Rated
         </button>
-        <div className='price'>
-          <p>Price</p>
-          <ul>
-            <li onClick={() => handlePriceInputChange('asc')} className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''}>
-              Price: Low to High
-            </li>
-            <li onClick={() => handlePriceInputChange('desc')} className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''}>
-              Price: High to Low
-            </li>
-          </ul>
-        </div>
+
+        <ul>
+          <li>
+            <div className={!topRatedInputFrag ? 'is-active' : ''}>
+              {topRatedInputFrag ? 'Price' : priceSortInput === 'asc' ? 'Price: Low to High' : 'Price: High to Low'}
+              <i className='bi bi-chevron-down'></i>
+            </div>
+            <ul>
+              <li>
+                <div onClick={() => handlePriceInputChange('asc')} className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''}>
+                  Price: Low to High {!topRatedInputFrag && priceSortInput === 'asc' ? <i className='bi bi-check2'></i> : ''}
+                </div>
+              </li>
+              <li>
+                <div onClick={() => handlePriceInputChange('desc')} className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''}>
+                  Price: High to Low {!topRatedInputFrag && priceSortInput === 'desc' ? <i className='bi bi-check2'></i> : ''}
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
         <p className='total'>Total: {total}</p>
       </div>
 
-      <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} />) : <p>Loading...</p>}</div>
+      <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
     </>
   );
 }
