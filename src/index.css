@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 * {
   box-sizing: border-box;
@@ -9,12 +9,12 @@ p {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   /* font-weight: <weight>; */
   font-style: normal;
   color: #333;
-  padding: 80px 0;
+  padding: 32px 0;
 }
 
 .App {
@@ -52,6 +52,29 @@ h1 {
     transform: translateY(-50%);
     left: 18px;
     color: #a3a3a3;
+  }
+}
+
+.sort-input {
+  background: #eee;
+  display: flex;
+  gap: 16px;
+  padding: 8px 16px;
+  margin-top: 8px;
+  font-size: 14px;
+  align-items: center;
+
+  button {
+    padding: 8px 16px;
+    background: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .is-active {
+    background: #ef4444;
+    color: #fff;
   }
 }
 

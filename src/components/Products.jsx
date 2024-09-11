@@ -13,6 +13,8 @@ export default function Products() {
   https://dummyjson.com/products/search?q=apple&sortBy=price&order=desc
   https://dummyjson.com/products/search?q=phone&limit=10&skip=10&select=title,price,description,
 
+  デフォルトはtop rated、PriceをさわればPrice順番
+  Top retatedを押せば、その通りに
 
   */
 
@@ -76,10 +78,10 @@ export default function Products() {
     };
   }, [searchInput, topRatedInput, priceSortInput]);
 
-  useEffect(() => {
-    
-    setTopRatedInput(false);
-  }, [priceSortInput]);
+  // useEffect(() => {
+  //   if (topRatedInput && priceSortInput === 'desc') setTopRatedInput(false);
+  //   if (topRatedInput && priceSortInput === 'desc') setTopRatedInput(false);
+  // }, [priceSortInput]);
 
   function handleChange(e) {
     setSearchInput(e.target.value);
@@ -93,7 +95,7 @@ export default function Products() {
       </div>
       <div className='sort-input'>
         <p>Sort by</p>
-        <button type='button' onClick={() => setTopRatedInput((v) => !v)}>
+        <button type='button' onClick={() => setTopRatedInput((v) => !v)} className={topRatedInput ? "is-active": ""}>
           Top Rated
         </button>
         <select value={priceSortInput} onChange={(e) => setPriceSortInput(e.target.value)}>
