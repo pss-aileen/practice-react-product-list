@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import Product from './Product';
+import { StateContext } from '../StateContext';
+import Header from './Header';
 
 export default function Products() {
   const [total, setTotal] = useState(0);
@@ -85,66 +87,52 @@ export default function Products() {
     setTopRatedInputFrag(true);
   }
 
-  function handleChange(e) {
-    setSearchInput(e.target.value);
-  }
-
   return (
     <>
-      <header>
-        <div>
-          <h1>
-            <i className='bi bi-bag-heart-fill'></i>
-            <span>Product List</span>
-          </h1>
-          <div className='search-input'>
-            <input type='text' value={searchInput} placeholder='Search Product Name & Description' onChange={handleChange} />
-            <i className='bi bi-search'></i>
-          </div>
-        </div>
-      </header>
+      <StateContext.Provider value={{ searchInput, setSearchInput }}>
+        <Header />
 
-      <div className='products-info'>
-        <div>
-          <p className='total'>{total} results</p>
+        <div className='products-info'>
+          <div>
+            <p className='total'>{total} results</p>
 
-          <button type='button' onClick={() => setIsFiltersOpen((bool) => !bool)} className='btn-filter'>
-            <i className='bi bi-funnel'></i> Filter
-          </button>
-          <div className={`overlay ${isFiltersOpen ? 'is-open' : ''}`} onClick={() => setIsFiltersOpen((bool) => !bool)}></div>
+            <button type='button' onClick={() => setIsFiltersOpen((bool) => !bool)} className='btn-filter'>
+              <i className='bi bi-funnel'></i> Filter
+            </button>
+            <div className={`overlay ${isFiltersOpen ? 'is-open' : ''}`} onClick={() => setIsFiltersOpen((bool) => !bool)}></div>
 
-          <div className={`filters ${isFiltersOpen ? 'is-open' : ''}`}>
-            <div>
-              <h2>Filters</h2>
-              <button onClick={() => setIsFiltersOpen((bool) => !bool)} className='btn-close' aria-label='close'>
-                <i className='bi bi-x-lg'></i>
-              </button>
+            <div className={`filters ${isFiltersOpen ? 'is-open' : ''}`}>
+              <div>
+                <h2>Filters</h2>
+                <button onClick={() => setIsFiltersOpen((bool) => !bool)} className='btn-close' aria-label='close'>
+                  <i className='bi bi-x-lg'></i>
+                </button>
 
-              <dl>
-                <div className='sort'>
-                  <dt>Sort by</dt>
-                  <dd>
-                    <button type='button' onClick={handleTopRatedChange} className={topRatedInputFrag ? 'is-active' : ''} disabled={topRatedInputFrag}>
-                      Top Rated
-                    </button>
+                <dl>
+                  <div className='sort'>
+                    <dt>Sort by</dt>
+                    <dd>
+                      <button type='button' onClick={handleTopRatedChange} className={topRatedInputFrag ? 'is-active' : ''} disabled={topRatedInputFrag}>
+                        Top Rated
+                      </button>
 
-                    <button type='button' className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''} onClick={() => handlePriceInputChange('asc')}>
-                      Price: Low to High
-                    </button>
-                    <button type='button' className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''} onClick={() => handlePriceInputChange('desc')}>
-                      Price: High to Low
-                    </button>
-                  </dd>
-                </div>
-              </dl>
+                      <button type='button' className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''} onClick={() => handlePriceInputChange('asc')}>
+                        Price: Low to High
+                      </button>
+                      <button type='button' className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''} onClick={() => handlePriceInputChange('desc')}>
+                        Price: High to Low
+                      </button>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className='container'>
-        <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
-      </div>
+        <div className='container'>
+          <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
+        </div>
+      </StateContext.Provider>
     </>
   );
 }
