@@ -11,6 +11,9 @@ export default function Products() {
   const [topRatedInput, setTopRatedInput] = useState(true);
   const [topRatedInputFrag, setTopRatedInputFrag] = useState(true);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [categoryInput, setCategoryInput] = useState('');
+
+  console.log(categoryInput);
 
   /*
   目標URL: 
@@ -55,11 +58,17 @@ export default function Products() {
 
       let officialUrl = baseUrl;
 
+      if (categoryInput !== '') {
+        officialUrl += '/category/' + categoryInput;
+      }
+
       if (!searchInput) {
         officialUrl += '?';
       }
 
-      if (searchInput !== '') {
+      if (searchInput !== '' && categoryInput !== '') {
+        officialUrl += '?search?q=' + searchInput;
+      } else if (searchInput !== '') {
         officialUrl += '/search?q=' + searchInput;
       }
 
@@ -72,7 +81,7 @@ export default function Products() {
       }
 
       officialUrl += connection + selectedData;
-      // console.log(officialUrl);
+      console.log(officialUrl);
       return officialUrl;
     }
 
@@ -83,7 +92,7 @@ export default function Products() {
     return () => {
       isMounted = false;
     };
-  }, [searchInput, topRatedInput, priceSortInput, priseSortInputFrag]);
+  }, [searchInput, topRatedInput, priceSortInput, priseSortInputFrag, categoryInput]);
 
   useEffect(() => {}, [priseSortInputFrag]);
 
@@ -153,7 +162,7 @@ export default function Products() {
                 <div>
                   <dt>CATEGORY</dt>
                   <dd>
-                    <Categories />
+                    <Categories categoryInput={categoryInput} setCategoryInput={setCategoryInput} />
                   </dd>
                 </div>
               </dl>

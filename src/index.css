@@ -297,6 +297,12 @@ header {
         color: #fff;
         border: 1px solid #ef4444;
       }
+
+      .is-active {
+        background: #ef4444;
+        color: #fff;
+        border: 1px solid #ef4444;
+      }
     }
   }
 }

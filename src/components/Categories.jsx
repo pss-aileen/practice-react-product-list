@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import Category from './Category';
 
-export default function Categories() {
+export default function Categories({ setCategoryInput, categoryInput }) {
   const [categories, setCategories] = useState(null);
+
   // https://dummyjson.com/products/categories
   useEffect(() => {
     let isMounted = true;
@@ -35,7 +36,7 @@ export default function Categories() {
       <ul>
         {categories
           ? categories.map((category) => {
-              return <Category key={category.slug} name={category.name} slug={category.slug} />;
+              return <Category key={category.slug} name={category.name} slug={category.slug} setCategoryInput={setCategoryInput} categoryInput={categoryInput} />;
             })
           : 'Loading...'}
       </ul>
