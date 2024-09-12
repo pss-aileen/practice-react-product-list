@@ -31,9 +31,12 @@ header {
     width: calc(100% - 32px);
     margin: 0 auto;
     padding: 8px 0;
-    display: flex;
-    gap: 24px;
     align-items: center;
+    @media (width >= 800px) {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
 
     h1 {
       margin: 0;
@@ -41,11 +44,16 @@ header {
       display: flex;
       gap: 8px;
       align-items: center;
+      justify-content: center;
     }
 
     .search-input {
-      flex: 1;
       position: relative;
+      margin-top: 8px;
+      @media (width >= 800px) {
+        flex: 1;
+        margin-top: 0;
+      }
 
       input {
         display: block;
@@ -55,7 +63,7 @@ header {
         color: #333;
         border: none;
         padding: 8px 8px 8px 48px;
-        border: 1px solid #a3a3a3;
+        /* border: 1px solid #a3a3a3; */
         border-radius: 4px;
       }
 
@@ -74,7 +82,7 @@ header {
   }
 }
 
-.sort-input {
+.products-info {
   background: #fff;
   border-bottom: 1px solid #eee;
 
@@ -86,29 +94,167 @@ header {
     font-size: 14px;
     align-items: center;
     max-width: var(--max-width);
-  }
-
-  button {
-    padding: 8px 16px;
-    background: #fff;
-    border: none;
-    border-radius: 2px;
-    border: 1px solid #eee;
-  }
-
-  button:not(:disabled) {
-    cursor: pointer;
-  }
-
-  .is-active {
-    background: #ef4444;
-    color: #fff;
-    border: 1px solid #ef4444;
+    width: calc(100% - 32px);
+    justify-content: space-between;
   }
 
   .total {
     color: #999;
-    margin-right: auto;
+  }
+
+  dl {
+    div {
+      margin-top: 16px;
+    }
+    dt {
+      /* font-weight: bold; */
+      color: #777;
+    }
+
+    dd {
+      margin: 8px 0 0;
+    }
+  }
+}
+
+.btn-filter {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  @media (width >= 800px) {
+    display: none;
+  }
+}
+
+.filters.is-open {
+  right: 0px;
+  transform: translateX(0%);
+  pointer-events: all;
+}
+
+.overlay.is-open {
+  pointer-events: all;
+  opacity: 1;
+  /* 以下はまたちょっとやり方考える */
+  @media (width >= 800px) {
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgb(0 0 0 / 0.6);
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.filters {
+  @media (width < 800px) {
+    max-width: 80%;
+    position: fixed;
+    top: 0;
+    right: 0px;
+    transform: translateX(100%);
+    background: #fff;
+    height: 100svh;
+    z-index: 999;
+    pointer-events: none;
+    transition: transform 0.3s;
+    overflow-y: scroll;
+  }
+
+  @media (width >= 800px) {
+  }
+
+  > div {
+    padding: 16px;
+    position: relative;
+    @media (width >= 800px) {
+      padding: 0;
+    }
+
+    > button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px;
+
+      @media (width >= 800px) {
+        display: none;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 16px;
+    margin: 0;
+
+    @media (width >= 800px) {
+      display: none;
+    }
+  }
+
+  dl {
+    @media (width >= 800px) {
+      margin: 0;
+    }
+  }
+
+  .sort {
+    @media (width >= 800px) {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 0;
+    }
+    dd {
+      @media (width >= 800px) {
+        display: flex;
+        gap: 8px;
+        margin-top: 0;
+      }
+
+      button {
+        padding: 8px 16px;
+        background: #fff;
+        border: none;
+        border-radius: 2px;
+        border: 1px solid #eee;
+        display: block;
+      }
+
+      button:not(:disabled) {
+        cursor: pointer;
+      }
+
+      .is-active {
+        background: #ef4444;
+        color: #fff;
+        border: 1px solid #ef4444;
+      }
+
+      button + button {
+        margin-top: 8px;
+        @media (width >= 800px) {
+          margin-top: 0;
+        }
+      }
+    }
   }
 
   ul {
@@ -169,51 +315,8 @@ header {
 
 .container {
   max-width: var(--max-width);
-  width: 100%;
-  margin: 32px auto;
-  display: flex;
-  gap: 32px;
-}
-
-.sidebar {
-  width: 180px;
-
-  h2 {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-
-    li {
-      span {
-        display: block;
-        font-size: 14px;
-        padding: 8px 16px;
-        background: #fff;
-        border: none;
-        border-radius: 2px;
-        border: 1px solid #eee;
-        cursor: pointer;
-      }
-
-      span:hover {
-        background: #ef4444;
-        color: #fff;
-        border: 1px solid #ef4444;
-      }
-    }
-
-    li + li {
-      margin-top: 4px;
-    }
-  }
-}
-
-.main {
-  flex: 1;
+  width: calc(100% - 32px);
+  margin: 16px auto;
 }
 
 .products {
@@ -225,24 +328,34 @@ header {
   section {
     border: 1px solid #eee;
     border-radius: 4px;
-    /* width: calc((100% - 16px * 4) / 5); */
-    width: 100%;
+    width: calc((100% - 16px * 1) / 2);
+    /* width: 100%; */
     overflow: hidden;
     position: relative;
-    display: flex;
     background: #fff;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
+    @media (width >= 800px) {
+      display: flex;
+      align-items: center;
+    }
 
     .thumbnail {
-      width: 140px;
-      height: 100%;
-      padding: 8px;
+      width: 100%;
+      aspect-ratio: 4/3;
+      padding: 0px;
       background: #eee;
+
+      @media (width >= 800px) {
+        width: 160px;
+        height: 100%;
+      }
+
       img {
         width: 100%;
         height: 100%;
         aspect-ratio: 1/1;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
 
@@ -274,18 +387,21 @@ header {
       padding: 16px;
 
       .title {
-        font-size: 18px;
         font-weight: bold;
       }
 
       .description {
         font-size: 12px;
         color: #999;
+        display: none;
+
+        @media (width >= 800px) {
+          display: block;
+        }
       }
 
       .price {
         color: #ef4444;
-        font-size: 18px;
         /* text-align: right; */
       }
 

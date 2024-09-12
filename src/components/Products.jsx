@@ -9,16 +9,7 @@ export default function Products() {
   const [priseSortInputFrag, setPriseSortInputFrag] = useState(false);
   const [topRatedInput, setTopRatedInput] = useState(true);
   const [topRatedInputFrag, setTopRatedInputFrag] = useState(true);
-
-  /*
-  目標URL: 
-  https://dummyjson.com/products/search?q=apple&sortBy=price&order=desc
-  https://dummyjson.com/products/search?q=phone&limit=10&skip=10&select=title,price,description,
-
-  デフォルトはtop rated、PriceをさわればPrice順番
-  Top retatedを押せば、その通りに
-
-  */
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -113,78 +104,46 @@ export default function Products() {
         </div>
       </header>
 
-      <div className='sort-input'>
+      <div className='products-info'>
         <div>
           <p className='total'>{total} results</p>
-          {/* <p className='total'>1-24 of {total} results</p> */}
-          <p>Sort by</p>
-          <button type='button' onClick={handleTopRatedChange} className={topRatedInputFrag ? 'is-active' : ''} disabled={topRatedInputFrag}>
-            Top Rated
-          </button>
 
-          <ul>
-            <li>
-              <div className={!topRatedInputFrag ? 'is-active' : ''}>
-                {topRatedInputFrag ? 'Price' : priceSortInput === 'asc' ? 'Price: Low to High' : 'Price: High to Low'}
-                <i className='bi bi-chevron-down'></i>
-              </div>
-              <ul>
-                <li>
-                  <div onClick={() => handlePriceInputChange('asc')} className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''}>
-                    Price: Low to High {!topRatedInputFrag && priceSortInput === 'asc' ? <i className='bi bi-check2'></i> : ''}
-                  </div>
-                </li>
-                <li>
-                  <div onClick={() => handlePriceInputChange('desc')} className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''}>
-                    Price: High to Low {!topRatedInputFrag && priceSortInput === 'desc' ? <i className='bi bi-check2'></i> : ''}
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <button type='button' onClick={() => setIsFiltersOpen((bool) => !bool)} className='btn-filter'>
+            <i className='bi bi-funnel'></i> Filter
+          </button>
+          <div className={`overlay ${isFiltersOpen ? 'is-open' : ''}`} onClick={() => setIsFiltersOpen((bool) => !bool)}></div>
+
+          <div className={`filters ${isFiltersOpen ? 'is-open' : ''}`}>
+            <div>
+              <h2>Filters</h2>
+              <button onClick={() => setIsFiltersOpen((bool) => !bool)} className='btn-close' aria-label='close'>
+                <i className='bi bi-x-lg'></i>
+              </button>
+
+              <dl>
+                <div className='sort'>
+                  <dt>Sort by</dt>
+                  <dd>
+                    <button type='button' onClick={handleTopRatedChange} className={topRatedInputFrag ? 'is-active' : ''} disabled={topRatedInputFrag}>
+                      Top Rated
+                    </button>
+
+                    <button type='button' className={!topRatedInputFrag && priceSortInput === 'asc' ? 'is-active' : ''} onClick={() => handlePriceInputChange('asc')}>
+                      Price: Low to High
+                    </button>
+                    <button type='button' className={!topRatedInputFrag && priceSortInput === 'desc' ? 'is-active' : ''} onClick={() => handlePriceInputChange('desc')}>
+                      Price: High to Low
+                    </button>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className='container'>
-        <div className='sidebar'>
-          <h2>CATEGORY</h2>
-
-          <ul>
-            <li>
-              <span>Beauty</span>
-            </li>
-            <li>
-              <span>Fragrances</span>
-            </li>
-            <li>
-              <span>Furniture</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-            <li>
-              <span>beauty</span>
-            </li>
-          </ul>
-        </div>
-        <div className='main'>
-          <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
-        </div>
+        <div className='products'>{products ? products.map((product) => <Product key={product.id} title={product.title} description={product.description} price={product.price} thumbnail={product.thumbnail} availabilityStatus={product.availabilityStatus} rating={product.rating} />) : <p>Loading...</p>}</div>
       </div>
     </>
   );
