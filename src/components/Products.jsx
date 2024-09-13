@@ -12,6 +12,7 @@ export default function Products() {
   const [topRatedInput, setTopRatedInput] = useState(true);
   const [topRatedInputFrag, setTopRatedInputFrag] = useState(true);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  // top-rated, low-high, high-lowは sory っていうオブジェクトに入れてしまって、それに応じて切り替えるのがいいのか？
 
   useEffect(() => {
     let isMounted = true;
